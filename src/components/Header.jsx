@@ -29,18 +29,18 @@ const Header = () => {
       </div>
       <ul className="navigation-menu-main">
         <li>
-          <NavLink activeClassName="navigation-menu-active" exact to="/">
+          <NavLink activeclassname="navigation-menu-active" to="/">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="navigation-menu-active" to="/shop">
+          <NavLink activeclassname="navigation-menu-active" to="/shop">
             Shop
           </NavLink>
         </li>
         <li>
           <NavLink
-            activeClassName="navigation-menu-active"
+            activeclassname="navigation-menu-active"
             to="/featured-products"
           >
             Featured
@@ -48,7 +48,7 @@ const Header = () => {
         </li>
         <li>
           <NavLink
-            activeClassName="navigation-menu-active"
+            activeclassname="navigation-menu-active"
             to="/recommended-products"
           >
             Recommended
