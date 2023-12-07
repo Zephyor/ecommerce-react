@@ -1,63 +1,50 @@
+// SignInPage.jsx
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext"; // Adjust the import path
 
 const SignInPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const [error, setError] = useState("");
+  const { register, handleSubmit } = useForm();
+  const { signIn, user } = useAuth(); // Assuming you have a getCurrentUser method
 
-  const { signIn, user } = useAuth();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    signIn(data.email, data.password);
+  const onSubmit = async (data) => {
+    try {
+      await signIn(data.email, data.password);
+    } catch (error) {
+      // Handle the sign-in error
+      console.error("Sign In Error:", error.message);
+      setError("Invalid email or password.");
+    }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div>
-      {user ? (
-        <p>Welcome, {user.email}!</p>
-      ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label>Email</label>
-            <input
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: "Invalid email address",
-                },
-              })}
-            />
-            {errors.email && (
-              <p style={{ color: "red" }}>{errors.email.message}</p>
-            )}
-          </div>
+      <h2>Sign In</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>Email</label>
+        <input {...register("email", { required: true })} />
 
-          <div>
-            <label>Password</label>
-            <input
-              {...register("password", { required: "Password is required" })}
-            />
-            {errors.password && (
-              <p style={{ color: "red" }}>{errors.password.message}</p>
-            )}
-          </div>
+        <label>Password</label>
+        <input {...register("password", { required: true })} />
 
-          <div>
-            <button type="submit">Login</button>
-          </div>
-        </form>
-      )}
+        <input type="submit" value="Sign In" />
+      </form>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
       <p>
-        Don&apos;t have an account? <Link to="/signup">Sign Un</Link>
+        Don&apos;t have an account? <Link to="/signup">Sign Up</Link>
       </p>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
     </div>
   );
 };

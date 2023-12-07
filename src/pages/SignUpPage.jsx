@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const SignUpPage = () => {
   const {
@@ -9,11 +10,18 @@ const SignUpPage = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
   const { signUp, user } = useAuth();
 
   const onSubmit = (data) => {
     signUp(data.email, data.password);
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <div>
