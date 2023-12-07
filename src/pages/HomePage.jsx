@@ -1,19 +1,9 @@
-import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const HomePage = () => {
-  return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <div>
-        <Link to="/signin">
-          <button>SignIn</button>
-        </Link>
-        <Link to="/signup">
-          <button>SignUp</button>
-        </Link>
-      </div>
-    </div>
-  );
+  const { user } = useAuth();
+
+  return <div>{user ? <h1>Welcome {user.email}</h1> : <h1>Welcome!</h1>}</div>;
 };
 
 export default HomePage;
