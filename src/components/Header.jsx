@@ -1,6 +1,7 @@
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useRef } from "react";
+import PS5 from "../images/ps5-playstation-5-logo.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Header = () => {
     <nav className="navigation" ref={navbar}>
       <div className="logo">
         <Link to="/">
-          <h1>Logo</h1>
+          <img src={PS5} alt="Logo" />
         </Link>
       </div>
       <ul className="navigation-menu-main">
