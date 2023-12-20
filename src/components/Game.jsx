@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchGameData } from "../firestore";
 import GameCard from "./GameCard";
+import "../styles/components/gamegrid.scss";
 
 const GameComponent = () => {
   const [games, setGames] = useState([]);
@@ -19,7 +20,7 @@ const GameComponent = () => {
   }, []);
 
   return (
-    <div>
+    <div className="game-grid">
       {games.map((game) => (
         <GameCard key={game.id} game={game} />
       ))}

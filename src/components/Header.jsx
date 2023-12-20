@@ -2,6 +2,8 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useRef } from "react";
 import PS5 from "../images/ps5-playstation-5-logo.png";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Icon } from "@mui/material";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -34,11 +36,6 @@ const Header = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink activeclassname="navigation-menu-active" to="/shop">
-            Shop
-          </NavLink>
-        </li>
-        <li>
           <NavLink
             activeclassname="navigation-menu-active"
             to="/featured-products"
@@ -46,19 +43,13 @@ const Header = () => {
             Featured
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            activeclassname="navigation-menu-active"
-            to="/recommended-products"
-          >
-            Recommended
-          </NavLink>
-        </li>
       </ul>
       <ul className="navigation-menu">
         {user ? (
           <li className="navigation-menu-item">
-            <button onClick={handleSignOut}>Logout</button>
+            <button className="button" onClick={handleSignOut}>
+              <LogoutIcon />
+            </button>
           </li>
         ) : (
           <li className="navigation-action">

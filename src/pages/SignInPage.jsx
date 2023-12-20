@@ -2,22 +2,32 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext"; // Adjust the import path
+import { useAuth } from "../contexts/AuthContext";
+import "../styles/style.scss";
 
 const SignInPage = () => {
   const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
-  const { signIn, user } = useAuth(); // Assuming you have a getCurrentUser method
-
+  const { signIn, user } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       await signIn(data.email, data.password);
     } catch (error) {
-      // Handle the sign-in error
       console.error("Sign In Error:", error.message);
-      setError("Invalid email or password.");
+      let errorMessage =
+        "An error occurred during sign in. Please try again later.";
+
+      if (
+        error.code === "auth/invalid-email" ||
+        error.code === "auth/wrong-password"
+      ) {
+        errorMessage =
+          "Invalid email or password. Please check your credentials.";
+      }
+
+      alert(errorMessage);
     }
   };
 
@@ -28,19 +38,21 @@ const SignInPage = () => {
   }, [user, navigate]);
 
   return (
-    <div>
+    <div className="signin-container">
       <h2>Sign In</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="signin-form" onSubmit={handleSubmit(onSubmit)}>
         <label>Email</label>
         <input {...register("email", { required: true })} />
 
         <label>Password</label>
-        <input {...register("password", { required: true })} />
+        <input type="password" {...register("password", { required: true })} />
 
-        <input type="submit" value="Sign In" />
+        <button className="button" type="submit">
+          Sign In
+        </button>
       </form>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
 
       <p>
         Don&apos;t have an account? <Link to="/signup">Sign Up</Link>

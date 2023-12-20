@@ -1,7 +1,9 @@
+// SignUpPage.jsx
 import { useForm } from "react-hook-form";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import "../styles/style.scss";
 
 const SignUpPage = () => {
   const {
@@ -24,48 +26,42 @@ const SignUpPage = () => {
   }, [user, navigate]);
 
   return (
-    <div>
+    <div className="signup-container">
+      <h2>Sign Up</h2>
       {user ? (
         <p>Welcome, {user.email}!</p>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label>Email</label>
-            <input
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: "Invalid email address",
-                },
-              })}
-            />
-            {errors.email && (
-              <p style={{ color: "red" }}>{errors.email.message}</p>
-            )}
-          </div>
+        <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
+          <label>Email</label>
+          <input
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Invalid email address",
+              },
+            })}
+          />
+          {errors.email && (
+            <p className="error-message">{errors.email.message}</p>
+          )}
 
-          <div>
-            <label>Password</label>
-            <input
-              {...register("password", { required: "Password is required" })}
-            />
-            {errors.password && (
-              <p style={{ color: "red" }}>{errors.password.message}</p>
-            )}
-          </div>
-
-          <div>
-            <button type="submit">Register</button>
-          </div>
+          <label>Password</label>
+          <input
+            type="password"
+            {...register("password", { required: "Password is required" })}
+          />
+          {errors.password && (
+            <p className="error-message">{errors.password.message}</p>
+          )}
+          <button className="button" type="submit">
+            Sign Up
+          </button>
         </form>
       )}
       <p>
-        Already have an account? <Link to="/signin">Sign Ip</Link>
+        Already have an account? <Link to="/signin">Sign In</Link>
       </p>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
     </div>
   );
 };

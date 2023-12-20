@@ -1,0 +1,28 @@
+// Add this to your product page stylesheet (e.g., productPage.scss)
+.product-container {
+    display: flex;
+    border: 1px solid #ddd; /* Border for the product container */
+    max-width: 95%; /* Set the maximum width of the container */
+    margin: 0 auto; /* Center the container horizontally */
+    margin-top: 10rem;
+    height: 40rem;
+  }
+  
+  .product-card {
+    flex-basis: 50%; /* Set the width of the card to 50% */
+  }
+  
+  .product-details {
+    flex-basis: 50%; /* Set the width of the details container to 50% */
+    padding: 20px; /* Add padding for spacing inside the container */
+    box-sizing: border-box; /* Include padding in the total width/height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .product-details button {
+    align-self: flex-end; /* Align the button to the bottom right */
+    padding: 10px; /* Add padding to the button */
+  }
+  
