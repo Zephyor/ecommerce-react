@@ -12,7 +12,6 @@
 // ---------------------------
 // 02 - TOOLS
 
-
 // ---------------------------
 // 03 - GENERIC
 
@@ -24,7 +23,6 @@
 @import './elements/links';
 @import './elements/select';
 
-
 // ---------------------------
 // 05 - COMPONENTS
 
@@ -35,6 +33,7 @@
 @import './components/banner';
 @import './components/signin';
 @import './components/signup';
+@import './components/sidecart';
 
 // ---------------------------
 // 06 - UTILITIES
@@ -42,5 +41,3 @@
 @import './utils/state.scss';
 @import './utils/utils.scss';
 @import './utils/animations.scss';
-
-

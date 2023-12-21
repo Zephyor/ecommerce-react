@@ -1,0 +1,39 @@
+// style.scss
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px; /* Adjust as needed */
+  background-color: white; /* Set the desired background color */
+  z-index: 1000; /* Ensure it's above other content */
+  /* Add other styles as needed */
+  height: 100%;
+
+  overflow-y: auto;
+
+  h3 {
+    margin: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      margin: 0.5rem;
+    }
+  }
+
+  p {
+    margin: 1rem;
+  }
+
+  button {
+    margin: 1rem;
+  }
+}
+
+.cart-sidebar.cart-open {
+  right: 0; /* Move the cart to the visible position when cart-open class is applied */
+}
