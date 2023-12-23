@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 const FeaturedPage = () => {
   return (
     <Fragment>
-      <h1>Featured Page</h1>
+      <h1>To be added</h1>
     </Fragment>
   );
 };

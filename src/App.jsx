@@ -9,6 +9,8 @@ import ProductPage from './pages/ProductPage';
 import ShoppingCart from './components/SideCart';
 import { useState } from 'react';
 import { CartProvider } from './contexts/CartContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -18,27 +20,27 @@ const App = () => {
   };
   return (
     <AuthProvider>
-              <CartProvider>
-
-      <Router>
-        <Header toggleCart={toggleCart}/>
-        {isCartOpen && (
-          <ShoppingCart
-            style={{
-              transform: isCartOpen ? 'translateX(0)' : 'translateX(100%)',
-            }}
-          />
-        )}
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/featured' element={<FeaturedPage />} />
-          <Route path='/product/:productId' element={<ProductPage />} />
-          <Route path='/signup' element={<SignUpPage />} />
-          <Route path='/signin' element={<SignInPage />} />
-        </Routes>
-      </Router>
+      <CartProvider>
+        <Router>
+          <Header toggleCart={toggleCart} />
+          {isCartOpen && (
+            <ShoppingCart
+              toggleCart={toggleCart}
+              style={{
+                transform: isCartOpen ? 'translateX(0)' : 'translateX(100%)',
+              }}
+            />
+          )}
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/featured' element={<FeaturedPage />} />
+            <Route path='/product/:productId' element={<ProductPage />} />
+            <Route path='/signup' element={<SignUpPage />} />
+            <Route path='/signin' element={<SignInPage />} />
+          </Routes>
+        </Router>
+        <ToastContainer />
       </CartProvider>
-
     </AuthProvider>
   );
 };
