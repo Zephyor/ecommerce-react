@@ -1,17 +1,34 @@
+import { useContext } from 'react';
+import { CartContext } from '../contexts/CartContext';
+import CartItem from './CartItem';
 import '../styles/style.scss';
 
-const ShoppingCart = () => {
+const ShoppingCart = ({ onClose }) => {
+  const { cart } = useContext(CartContext);
+
+  // Calcul du total en s'assurant que Price est un nombre
+  const totalPrice = cart.reduce((total, game) => {
+    const gamePrice = Number(game.Price); // Convertit Price en nombre si ce n'est pas déjà le cas
+    return total + gamePrice;
+  }, 0);
+
   return (
-    <div className='cart-sidebar'>
-      <h3>Your Shopping Cart</h3>
-      {/* Add your cart items and their details here */}
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        {/* Add more items as needed */}
-      </ul>
-      <p>Total: 79.99€</p>
-      <button className='button'>Checkout</button>
+    <div className="cart-sidebar">
+      <div className="cart-header">
+      <button className="close-cart button" onClick={onClose}>Close</button>
+      </div>
+      <div className="cart-content">
+      <h2 >Your Cart</h2>
+      {cart.length > 0 ? (
+        cart.map(game => <CartItem key={game.id} game={game} />)
+      ) : (
+        <p>Your cart is empty.</p>
+      )}
+      </div>
+      <div className="cart-total">
+        <p>Total: {totalPrice.toFixed(2)}€</p> {/* Affichage du total */}
+      </div>
+      <button className="button">Pay My Order</button>
     </div>
   );
 };

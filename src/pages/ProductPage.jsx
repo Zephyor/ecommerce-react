@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
 import GameCard from "../components/GameCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { fetchGameById } from "../firestore";
 import "../styles/components/product_container.scss";
 import "../styles/style.scss";
+import { CartContext } from "../contexts/CartContext";
 const ProductPage = () => {
   const { productId } = useParams();
   const [game, setGame] = useState(null);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,8 +23,9 @@ const ProductPage = () => {
     fetchData();
   }, [productId]);
 
+
   const handleAddToCart = () => {
-    // Implement the logic to add the current game to the cart
+    addToCart(game);
     console.log("Added to cart:", game);
   };
 

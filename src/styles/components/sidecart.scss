@@ -37,3 +37,14 @@
 .cart-sidebar.cart-open {
   right: 0; /* Move the cart to the visible position when cart-open class is applied */
 }
+
+.cart-header { /* Header of the cart */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+.cart-content {
+  padding: 1rem;
+}

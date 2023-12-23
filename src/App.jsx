@@ -8,6 +8,7 @@ import FeaturedPage from './pages/FeaturedPage';
 import ProductPage from './pages/ProductPage';
 import ShoppingCart from './components/SideCart';
 import { useState } from 'react';
+import { CartProvider } from './contexts/CartContext';
 
 const App = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -17,6 +18,8 @@ const App = () => {
   };
   return (
     <AuthProvider>
+              <CartProvider>
+
       <Router>
         <Header toggleCart={toggleCart}/>
         {isCartOpen && (
@@ -34,6 +37,8 @@ const App = () => {
           <Route path='/signin' element={<SignInPage />} />
         </Routes>
       </Router>
+      </CartProvider>
+
     </AuthProvider>
   );
 };
