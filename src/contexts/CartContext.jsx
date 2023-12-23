@@ -9,8 +9,8 @@ export const CartProvider = ({ children }) => {
     setCart(currentCart => [...currentCart, game]);
   };
 
-  const removeFromCart = (gameToRemove) => {
-    setCart(currentCart => currentCart.filter(game => game.id !== gameToRemove.id));
+  const removeFromCart = (docId) => {
+    setCart(currentCart => currentCart.filter(game => game.docId !== docId));
   };
 
   return (
@@ -19,4 +19,5 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
+
 
